@@ -1,0 +1,14 @@
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh; /* 화면 전체 높이 */
+    background-color: #ffffff;
+    background-image: url('MAIN LOGO.png'); /* 로고 이미지 경로 */
+    background-repeat: no-repeat;
+    background-size: 100%; /* 로고 크기 맞춤 */
+    background-position: center;
+    padding-top: 90px;
+}
+

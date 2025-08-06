@@ -1,0 +1,35 @@
+import React, {  } from "react";
+import "./aboutus.css";
+
+import headerImage from "../assets/about-us-image.png";
+import teamPhoto from "../assets/team_photo.png";
+
+
+const AboutUs = () => {
+    return (
+        <div className="about-us">
+            <div className="header-image-container">
+                <img src={headerImage} alt="Header Banner" className="header-image" />
+            </div>
+
+            <div className="content-container">
+                <div className="text-container">
+                    <h1>ABOUT US</h1>
+                    <p>
+                        JD MEDIA는 열심히 일합니다
+                    </p>
+                </div>
+
+                <div className="image-container">
+                    <img src={teamPhoto} alt="Team in a Meeting" className="team-photo" />
+                </div>
+            </div>
+            
+
+
+            </div>
+
+    );
+};
+
+export default AboutUs;

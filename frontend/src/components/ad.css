@@ -1,0 +1,103 @@
+/* ...기존 코드 유지... */
+
+.content-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto 0;
+  gap: 16px;
+}
+
+/* 광고 → 버튼 영역 전체가 클릭되도록 */
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.my-button {
+  background-color: #ffffff;
+  border: none;
+  color: #000;
+  padding: 10px 20px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.arrow {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.arrow::after {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 16px;
+  height: 16px;
+  border-top: 3px solid #000;
+  border-right: 3px solid #000;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* 썸네일 그리드 */
+.thumb-grid {
+  width: 90%;
+  max-width: 1200px;
+  margin: 10px auto 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 28px;
+}
+
+.thumb {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.thumb img {
+  width: 100%;
+  aspect-ratio: 4 / 4;
+  object-fit: contain;  /* 로고나 제품 이미지에 적합 */
+  background: #f7f7f7;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.thumb:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.thumb-title {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.thumb-subtitle {
+  font-size: 12px;
+  color: #666;
+}
+
+.section {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto 48px;
+}
+
+/* 버튼 줄을 섹션 안에서 쓰게 변경 */
+.section .button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  margin-bottom: 14px;
+}

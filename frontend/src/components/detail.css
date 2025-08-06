@@ -1,0 +1,74 @@
+.detail-wrap {
+  width: 90%;
+  max-width: 1200px;
+  margin: 32px auto 80px;
+  color: #111;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
+}
+
+.detail-title {
+  font-size: 44px;
+  font-weight: 800;
+  margin: 0 0 20px 0;
+  letter-spacing: 0.2px;
+}
+
+/* 좌우 2열 레이아웃 */
+.detail-body {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr; /* 좌측 더 넓게 */
+  gap: 36px;
+}
+
+/* 좌측 이미지 */
+.detail-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.detail-poster {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  background: #0f0f0f;
+  object-fit: cover;
+}
+
+/* 우측 메타 영역 */
+.detail-right {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.meta {
+  padding: 16px 0;
+  border-top: 1px solid #2a2a2a; /* 구분선 */
+}
+
+.meta:first-of-type { border-top: none; }
+
+.meta h3 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #cfcfcf;            /* 라벨 */
+  text-transform: none;
+}
+
+.meta p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #eaeaea;
+}
+
+/* 다크 배경 페이지와도 어울리게 */
+body { background: #0b0b0b; }
+.detail-wrap { color: #fff; }
+
+/* 반응형 */
+@media (max-width: 900px) {
+  .detail-body { grid-template-columns: 1fr; }
+}
