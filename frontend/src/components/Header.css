@@ -111,3 +111,16 @@ a { text-decoration:none; color:inherit; }
   border-radius:5px;
   cursor:pointer;
 }
+
+/* ───────── 헤더 레이아웃 ───────── */
+.header{
+  position:fixed;      /* ← 고정 */
+  top:0; left:0;       /* 뷰포트 최상단에 부착 */
+  width:100%;          /* 전체 폭 차지 */
+  z-index:1000;        /* 드롭다운·다른 요소보다 위 */
+  display:flex;
+  align-items:center;
+  padding:10px 30px;
+  background:#000;
+  color:#fff;
+}

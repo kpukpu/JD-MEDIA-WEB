@@ -1,14 +1,80 @@
-.main-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100vh; /* 화면 전체 높이 */
-    background-color: #ffffff;
-    background-image: url('MAIN LOGO.png'); /* 로고 이미지 경로 */
-    background-repeat: no-repeat;
-    background-size: 100%; /* 로고 크기 맞춤 */
-    background-position: center;
-    padding-top: 90px;
+/* ───────── Hero Section ───────── */
+.hero{
+  /* 헤더·푸터 고정 시 겹침 방지 → 숫자는 실제 높이에 맞게 조정 */
+  height:calc(100vh - 60px - 70px); /* 60=header, 70=footer */
+  padding-top:90px;
+  padding-bottom:70px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:32px;
+
+  background:#fff;
+  overflow:hidden;
 }
 
+/* 데스크톱 전용: 로고를 큼직하게 고정 폭 */
+.hero__logo{
+  width:480px;      /* ← 여기서 크기 조정 */
+  height:auto;
+  animation:fade-in 0.8s ease-out;
+}
+
+/* 제목 & 슬로건 */
+.hero__title{
+  margin:0;
+  text-align:center;
+  font-size:48px;
+  font-weight:900;
+  color:#3a5f27;
+}
+
+.hero__subtitle{
+  display:block;
+  margin-top:8px;
+  font-size:20px;
+  font-weight:400;
+  color:#555;
+}
+
+/* CTA 버튼 공통 */
+.btn{
+  display:inline-block;
+  padding:12px 28px;
+  border-radius:6px;
+  font-weight:700;
+  letter-spacing:.4px;
+  text-decoration:none;
+  transition:all .25s ease;
+  font-size:15px;
+}
+
+.btn.primary{
+  background:#3a5f27;
+  color:#fff;
+}
+
+.btn.outline{
+  border:2px solid #3a5f27;
+  color:#3a5f27;
+  margin-left:12px;
+}
+
+.btn.primary:hover,
+.btn.outline:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 18px rgba(0,0,0,.15);
+}
+
+.btn.outline:hover{
+  background:#3a5f27;
+  color:#fff;
+}
+
+/* 간단한 페이드-인 */
+@keyframes fade-in{
+  from{ opacity:0; transform:translateY(10px); }
+  to  { opacity:1; transform:none; }
+}
