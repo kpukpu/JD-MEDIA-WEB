@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 import AboutUs from "./components/aboutus";
 import Ad from "./components/ad";
 import ContactUs from "./components/contact-us";
-
+import Notice from "./components/notice";
 import AdvertiseList from "./components/AdvertiseList";
 import AdvertiseDetail from "./components/AdvertiseDetail";
 import EventList from "./components/EventList";
@@ -24,6 +24,7 @@ export default function App() {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/ad" element={<Ad />} />
         <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/notice" element={<Notice />} />
 
         {/* 광고 목록 */}
         <Route path="/contents/advertise/" element={<AdvertiseList />} />

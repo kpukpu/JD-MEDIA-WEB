@@ -1,103 +1,183 @@
-/* ...기존 코드 유지... */
-
-.content-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 90%;
-  max-width: 1200px;
-  margin: 20px auto 0;
-  gap: 16px;
-}
-
-/* 광고 → 버튼 영역 전체가 클릭되도록 */
-.button {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-}
-
-.my-button {
-  background-color: #ffffff;
-  border: none;
-  color: #000;
-  padding: 10px 20px;
-  font-size: 30px;
-  cursor: pointer;
-}
-
-.arrow {
-  position: relative;
-  width: 24px;
-  height: 24px;
-}
-
-.arrow::after {
-  content: "";
-  position: absolute;
-  left: 0; top: 50%;
-  width: 16px;
-  height: 16px;
-  border-top: 3px solid #000;
-  border-right: 3px solid #000;
-  transform: translateY(-50%) rotate(45deg);
-}
-
-/* 썸네일 그리드 */
-.thumb-grid {
-  width: 90%;
-  max-width: 1200px;
-  margin: 10px auto 60px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 28px;
-}
-
-.thumb {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.thumb img {
+/* ───────── 원형 갤러리 ───────── */
+.section--circular {
   width: 100%;
-  aspect-ratio: 4 / 4;
-  object-fit: contain;  /* 로고나 제품 이미지에 적합 */
-  background: #f7f7f7;
-  border-radius: 8px;
-  border: 1px solid #eee;
+  max-width: 1280px;
+  margin: 32px auto 48px;
 }
 
-.thumb:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+.section__head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:18px;
+}
+.section__title{
+  margin:0;
+  font-size:24px;
+  font-weight:800;
+}
+.section__cta{ display:flex; gap:8px; }
+.chip{
+  border:1px solid #e5e7eb;
+  background:#fff;
+  border-radius:999px;
+  padding:8px 14px;
+  font-size:14px;
+  cursor:pointer;
 }
 
-.thumb-title {
-  font-weight: 700;
-  font-size: 14px;
+/* 원형 컨테이너 */
+.circular{
+  --radius: 280px;         /* JS에서 override */
+  --item-size: 120px;
+  --spin-sec: 24s;
+
+  position: relative;
+  width: calc(var(--radius) * 2 + var(--item-size));
+  height: calc(var(--radius) * 2 + var(--item-size));
+  margin: 0 auto;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.08));
+}
+.circular--spin{
+  animation: spin var(--spin-sec) linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+/* 호버 시 자동회전 일시정지 */
+.circular:hover{
+  animation-play-state: paused;
 }
 
-.thumb-subtitle {
-  font-size: 12px;
-  color: #666;
+/* 중앙 라벨 */
+.circular__center{
+  position:absolute; inset:0;
+  display:grid; place-items:center;
+  pointer-events:none;
+}
+.circular__center-inner{
+  min-width: 140px;
+  padding: 16px 20px;
+  border-radius: 999px;
+  background: #111;
+  color:#fff;
+  font-weight:900;
+  letter-spacing:2px;
+  text-align:center;
+  transform: translateZ(0);
 }
 
-.section {
-  width: 90%;
-  max-width: 1200px;
-  margin: 20px auto 48px;
-}
-
-/* 버튼 줄을 섹션 안에서 쓰게 변경 */
-.section .button {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
+/* 아이템(절대 좌표 → 원 둘레에 배치) */
+.circular__item{
+  position: absolute;
+  left: 50%; top: 50%;
+  width: var(--item-size);
+  height: var(--item-size);
+  transform:
+    rotate(var(--angle))
+    translate(calc(var(--radius)))
+    rotate(calc(var(--angle) * -1));
+  transform-origin: center;
+  border: none;
+  background: transparent;
+  padding: 0;
   cursor: pointer;
-  margin-bottom: 14px;
 }
+.circular__item img{
+  width:100%; height:100%;
+  object-fit: contain;
+  background: #f7f7f7;
+  border:1px solid #eee;
+  border-radius: 16px;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.circular__item:hover img{
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+  background:#fff;
+}
+.circular__caption{
+  display:flex; flex-direction:column; align-items:center;
+  gap:2px;
+  margin-top:8px;
+  font-size:12px;
+  transform:
+    rotate(var(--angle))
+    translate(calc(var(--radius) * -1))
+    rotate(calc(var(--angle) * -1));
+  /* 캡션은 원 둘레 회전에 영향 안 받도록 보정 */
+  position: absolute; left: 50%; top: calc(50% + var(--item-size) / 2 + 8px);
+  translate: -50% 0;
+  pointer-events: none;
+}
+.circular__caption strong{ font-weight:800; font-size:12px; }
+.circular__caption em{ font-style:normal; color:#666; font-size:11px; }
+
+/* 반응형(너비 좁을 때 반지름/썸네일 축소) */
+@media (max-width: 1100px){
+  .circular{
+    --radius: 220px;
+    --item-size: 104px;
+  }
+}
+@media (max-width: 860px){
+  .circular{
+    --radius: 170px;
+    --item-size: 90px;
+  }
+}
+@media (max-width: 680px){
+  .circular{
+    --radius: 130px;
+    --item-size: 78px;
+  }
+}
+
+/* 섹션 헤드 정렬 */
+.section-head{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:14px;
+}
+
+/* 캔버스와 주변 요소 간 간격 */
+.section > div[style*="height: 560px"]{
+  margin-bottom: 24px;
+}
+/* 섹션 헤드 정렬 */
+.section-head{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:14px;
+}
+
+/* 갤러리 외곽(1번 사진 분위기) */
+.gallery-wrap{
+  background:#0b0617;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;
+  padding:12px;
+  overflow:hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+}
+
+
+/* 이 섹션만 화면 가로 전체로(컨테이너 폭 무시) */
+.section--bleed{
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* 풀블리드일 때는 모서리 없이 꽉 차 보이게(원하면 유지) */
+.section--bleed .gallery-wrap{
+  border-radius: 0;
+}
+
+/* 수평 스크롤 생기면 아래 한 줄을 about-us나 전역에 추가 */
+.about-us { overflow-x: hidden; }

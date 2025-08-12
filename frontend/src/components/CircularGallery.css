@@ -1,0 +1,14 @@
+/* src/components/CircularGallery.css */
+.circular-gallery {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  touch-action: none; /* 드래그 제스처 우리가 처리 */
+}
+.circular-gallery > canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
