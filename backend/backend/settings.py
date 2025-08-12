@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ── 보안/실행 ──────────────────────────────────────
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-secret-key-change-me")
 DEBUG = os.getenv("DEBUG", "True") == "True"
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "43.202.174.232"]
 
 # EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 load_dotenv(BASE_DIR / ".env", override=True)  # ★ override=True 추가
@@ -101,12 +101,14 @@ CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://43.202.174.232",
 ]
 CORS_ALLOW_CREDENTIALS = True  # 쿠키 전송 허용
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http//43.202.174.232",
 ]
 
 CORS_ALLOW_METHODS = ["DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"]
