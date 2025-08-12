@@ -93,7 +93,7 @@ EMAIL_PORT = int(os.getenv("EMAIL_PORT", "465"))
 EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", "True") == "True"  # ★ 465용
 #EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "false") == "False"   # 587용
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "daejo99@naver.com")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "F9TBNZ8HQ5K1")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "******")
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "daejo99@jdmkorea.com")
 
 # ── CORS / CSRF (로컬 개발용) ───────────────────────
