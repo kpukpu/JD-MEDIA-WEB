@@ -3,9 +3,13 @@ a { text-decoration:none; color:inherit; }
 
 /* ───────── 헤더 레이아웃 ───────── */
 .header{
+  position:fixed;
+  top:0; left:0;
+  width:100%;
+  z-index:1000;
   display:flex;
   align-items:center;
-  padding:10px 30px;        /* 좌·우 여백 */
+  padding:10px 30px;
   background:#000;
   color:#fff;
 }
@@ -18,14 +22,14 @@ a { text-decoration:none; color:inherit; }
 }
 
 /* 가운데 내비게이션 */
-.main-nav{ flex:1; }        /* 남은 공간 전부 차지 */
+.main-nav{ flex:1; }
 
 .nav-list{
   list-style:none;
   display:flex;
-  justify-content:center;   /* ★ 중앙 정렬 */
+  justify-content:center;
   align-items:center;
-  gap:45px;                 /* 메뉴 간 간격 */
+  gap:45px;
   margin:0;
   padding:0;
 }
@@ -34,13 +38,11 @@ a { text-decoration:none; color:inherit; }
   font-weight:bold;
 }
 
-/* ───────── 드롭다운 ───────── */
+/* ───────── 드롭다운 (기존) ───────── */
 .dropdown{ position:relative; }
-
 .drop-btn{ cursor:pointer; }
-
 .dropdown-menu{
-  list-style:none;   /* ★ 이 줄 추가! */
+  list-style:none;
   display:none;
   position:absolute;
   top:100%; left:0;
@@ -50,32 +52,89 @@ a { text-decoration:none; color:inherit; }
   padding:10px 0;
   z-index:500;
 }
-
-.dropdown-menu li{
-  margin:6px 18px;
-}
-
+.dropdown-menu li{ margin:6px 18px; }
 .dropdown:hover .dropdown-menu,
-.dropdown:focus-within .dropdown-menu{
-  display:block;
+.dropdown:focus-within .dropdown-menu{ display:block; }
+.dropdown-menu a:hover{ text-decoration:underline; }
+
+/* ───────── 오른쪽 도구 영역 ───────── */
+.right-tools{
+  margin-left:16px;
+  display:flex;
+  align-items:center;
+  gap:8px;
 }
 
-.dropdown-menu a:hover{
-  text-decoration:underline;
+/* ───────── 언어 선택(지구본) ───────── */
+.lang-selector{ position:relative; }
+
+.lang-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  background:transparent;
+  border:1px solid #555;
+  color:#fff;
+  cursor:pointer;
+  transition: background .2s, transform .06s;
 }
 
-/* ───────── 문의하기 버튼 ───────── */
-.contact-button{
-  padding:6px 15px;
-  border:2px solid #fff;
+.lang-btn:hover{ background:#111; }
+.lang-btn:active{ transform:scale(0.98); }
+
+.lang-icon{
+  width:20px;
+  height:20px;
+  fill:#fff;
+  pointer-events:none;
+}
+
+.lang-code{
+  font-size:11px;
+  opacity:.8;
+  user-select:none;
+}
+
+/* 드롭다운 메뉴 */
+.lang-menu{
+  position:absolute;
+  right:0;
+  top:calc(100% + 8px);
+  background:#000;
+  border:1px solid #555;
+  border-radius:10px;
+  min-width:160px;
+  padding:6px;
+  margin:0;
+  list-style:none;
+  z-index:1001;
+  box-shadow:0 10px 22px rgba(0,0,0,.35);
+}
+
+.lang-menu li{ margin:0; }
+
+.lang-menu li button{
+  width:100%;
   background:none;
   color:#fff;
-  font-size:15px;
-  border-radius:5px;
+  text-align:left;
+  border:none;
+  padding:10px 12px;
   cursor:pointer;
+  border-radius:8px;
+  font-size:14px;
 }
 
-/* ───────── 모달 ───────── */
+.lang-menu li[aria-selected="true"] button,
+.lang-menu li button:hover{
+  background:#111;
+}
+
+/* ───────── 문의 모달 (기존) ───────── */
 .modal-backdrop{
   position:fixed;
   inset:0;
@@ -96,12 +155,7 @@ a { text-decoration:none; color:inherit; }
 }
 
 .modal h2{ margin-top:0; font-size:20px; }
-
-.email{
-  font-weight:bold;
-  margin:12px 0 24px;
-}
-
+.email{ font-weight:bold; margin:12px 0 24px; }
 .close-btn{
   padding:6px 20px;
   font-size:15px;
@@ -111,16 +165,7 @@ a { text-decoration:none; color:inherit; }
   border-radius:5px;
   cursor:pointer;
 }
-
-/* ───────── 헤더 레이아웃 ───────── */
-.header{
-  position:fixed;      /* ← 고정 */
-  top:0; left:0;       /* 뷰포트 최상단에 부착 */
-  width:100%;          /* 전체 폭 차지 */
-  z-index:1000;        /* 드롭다운·다른 요소보다 위 */
-  display:flex;
-  align-items:center;
-  padding:10px 30px;
-  background:#000;
-  color:#fff;
+.right-tools{
+  margin-left:16px;
+  margin-right:50px; /* ← 이걸 추가하면 지구본이 왼쪽으로 12px 이동 */
 }
