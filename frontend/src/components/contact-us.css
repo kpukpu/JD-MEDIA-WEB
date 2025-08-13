@@ -1,4 +1,4 @@
-/* 레이아웃 기본 */
+/* ───────── 레이아웃 기본 ───────── */
 body, html {
   margin: 0;
   padding: 0;
@@ -6,20 +6,20 @@ body, html {
 
 .contact-wrap {
   width: 90%;
-  max-width: 940px;
+  max-width: 1200px;         /* 넓게 */
   margin: 24px auto 80px;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans KR", sans-serif;
   color: #f5f5f5;
 }
 
-/* 헤더 */
+/* ───────── 헤더 ───────── */
 .contact-header {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 16px;
-  padding: 0 4px 10px;
-  border-bottom: 2px solid #111;
+  padding: 0 4px 12px;
+  border-bottom: 2px solid #222;
   margin-bottom: 18px;
 }
 
@@ -29,35 +29,28 @@ body, html {
   letter-spacing: 1px;
 }
 
-.req-note {
-  font-size: 12px;
-  color: #444;
+.req-note { font-size: 12px; color: #bbb; }
+
+/* ───────── 2열 레이아웃 ───────── */
+.contact-split {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;   /* 지도 축소 비율 */
+  gap: 56px;                          /* 충분한 좌우 간격 */
+  align-items: start;
 }
 
-/* 행 레이아웃 */
+/* ───────── 폼 행 레이아웃 ───────── */
 .row {
   display: grid;
   grid-template-columns: 1fr;
   gap: 14px;
   margin: 16px 0;
 }
+.row.two   { grid-template-columns: 1fr 1fr; gap: 20px; }
+.row.three { grid-template-columns: 1fr 1fr 2fr; gap: 20px; }
+.row.end   { display: flex; justify-content: flex-end; }
 
-.row.two {
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.row.three {
-  grid-template-columns: 1fr 1fr 2fr;
-  gap: 20px;
-}
-
-.row.end {
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* 인풋/텍스트에어리어 공통 스타일 */
+/* ───────── 입력/텍스트 영역 ───────── */
 .input, .textarea {
   width: 100%;
   padding: 14px 12px;
@@ -65,27 +58,13 @@ body, html {
   outline: none;
   font-size: 14px;
   background: #faf7f7;
-  border-radius: 0; /* 이미지 느낌대로 각지게 */
+  border-radius: 0;
 }
+.input::placeholder, .textarea::placeholder { color: #111; }
+.input:focus, .textarea:focus { box-shadow: 0 0 0 2px rgba(0,0,0,0.1) inset; }
+.textarea { min-height: 160px; resize: vertical; }
 
-/* placeholder는 포커스/입력 시 사라짐(기본 동작) */
-.input::placeholder,
-.textarea::placeholder {
-  color: #111;
-}
-
-/* 포커스 스타일 */
-.input:focus, .textarea:focus {
-  box-shadow: 0 0 0 2px rgba(0,0,0,0.1) inset;
-}
-
-/* 텍스트영역 */
-.textarea {
-  min-height: 160px;
-  resize: vertical;
-}
-
-/* 버튼 */
+/* ───────── 버튼 ───────── */
 .submit-btn {
   border: 2px solid #111;
   background: #fff;
@@ -94,28 +73,77 @@ body, html {
   border-radius: 24px;
   cursor: pointer;
 }
+.submit-btn:active { transform: translateY(1px); }
+.submit-btn[disabled] { opacity: .6; cursor: not-allowed; }
 
-.submit-btn:active {
-  transform: translateY(1px);
+/* ───────── 결과 메시지 ───────── */
+.form-msg { margin: 8px 4px 0; font-size: 14px; }
+.form-msg.ok    { color: #1a7f37; }
+.form-msg.error { color: #c62828; }
+
+/* ───────── 좌측 지도 카드 ───────── */
+.map-col {
+  width: 100%;
+  background: #0a0a0a;               /* 다크 톤 카드 */
+  border: 1px solid #d9d9d9;         /* 얇은 테두리 */
+  padding: 12px;
+  color: #111;
+  position: sticky;                   /* 스크롤 고정 */
+  top: 80px;
+  align-self: start;
 }
 
-/* 반응형 */
+.map-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: #f2f2f2;
+}
+.map-note { font-size: 12px; color: #c8c8c8; }
+
+/* ───────── 지도 박스 (정사각형 + 축소 사이즈) ───────── */
+:root{
+  --map-size: 600px;                 /* 여기서 지도 크기 조절 (예: 380px/480px) */
+}
+
+.map-box{
+  width: min(100%, var(--map-size)); /* 가로폭 제한 */
+  height: auto;
+  aspect-ratio: 1 / 1;               /* 정사각형 유지 */
+  border: 1px solid #cfcfcf;         /* 얇은 테두리 */
+  background: #eaeaea;
+  margin-left: auto;                  /* 가운데 정렬 */
+  margin-right: auto;
+}
+
+/* Leaflet 컨테이너가 부모 높이를 꽉 채우도록 */
+.leaflet-host,
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* 지도 아래 주소 */
+.map-address{
+  margin-top: 10px;
+  font-size: 14px;
+  color: #f0f0f0;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* 좌표 입력 스타일 */
+.coords .input { background:#f6f6f6; color:#111; }
+
+/* ───────── 반응형 ───────── */
+@media (max-width: 980px) {
+  .contact-split { grid-template-columns: 1fr; gap: 24px; }
+  .map-col { position: static; }
+  .map-box { width: 100%; aspect-ratio: 1 / 1; }
+}
+
 @media (max-width: 640px) {
   .contact-header h1 { font-size: 40px; }
   .row.two, .row.three { grid-template-columns: 1fr; }
-}
-
-
-/* 결과 메시지 */
-.form-msg {
-  margin: 8px 4px 0;
-  font-size: 14px;
-}
-.form-msg.ok { color: #1a7f37; }
-.form-msg.error { color: #c62828; }
-
-/* 비활성 버튼 */
-.submit-btn[disabled] {
-  opacity: .6;
-  cursor: not-allowed;
 }
